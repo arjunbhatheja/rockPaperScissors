@@ -36,37 +36,27 @@ function playRound(getComputeChoice, playerChoice){
         return "You Win," + playerChoice + " beats " + getComputeChoice;
     }
 }
-function playGame(){
-    let res = [];
-    let computerPoints = 0;
-    let playerPoints = 0;
-    for(let i = 0; i<5; i++){
-        const playerSelection = AskplayerChoice();
-        const computerSelection = AskComputerChoice();
-        res = playRound(computerSelection, playerSelection).match(/\b(\w+)\b/g);
-        if(res[0] == "Its"){
-            computerPoints++;
-            playerPoints++;
-        }
-        else if(res[1] == "lose"){
-            computerPoints++;
-        }
-        else{
-            playerPoints++;
-        }
-        console.log("You: " + playerPoints + " | " + "Computer: " + computerPoints);
-    }
-    if(computerPoints>playerPoints){
-        console.log("Computer Wins by " + (computerPoints - playerPoints));
-    }
-    else if(playerPoints>computerPoints){
-        console.log("You Win by " + (playerPoints - computerPoints));
-    }
-    else{
-        console.log("You have tied with the Computer");
-    }
-}
+
 const roundCompChoice = AskComputerChoice();
 const roundPlayerChoice = AskplayerChoice();
 console.log(playRound(roundCompChoice, roundPlayerChoice));
-playGame();
+
+const div = document.createElement("div");
+const btnrock = div.createElement("button");
+const btnpaper = div.createElement("button");
+const btnscissor = div.createElement("button");
+
+div.appendChild(btnrock);
+div.appendChild(btnpaper);
+div.appendChild(btnscissor);
+
+const rockChoice = AskComputerChoice();
+console.log(btnrock.addEventListenter("click", playRound(rockChoice, 'rock')));
+
+const paperChoice = AskComputerChoice();
+console.log(btnrock.addEventListenter("click", playRound(paperChoice, 'paper')));
+
+const scissorChoice = AskComputerChoice();
+console.log(btnrock.addEventListenter("click", playRound(scissorChoice, 'scissor')));
+
+const div2 = document.createElement("div");
