@@ -7,56 +7,94 @@ function AskComputerChoice(){
         return "paper";
     }
     else{
-        return "scissor"
+        return "scissor";
     }
 }
-function AskplayerChoice(){
-    let choice = prompt("Rock Paper Scissor: ");
-    return choice.toLowerCase();
-}
 
+
+let playerPoints = 0;
+let comPoints = 0;
 function playRound(getComputeChoice, playerChoice){
     playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
     getComputeChoice = getComputeChoice.charAt(0).toUpperCase() + getComputeChoice.slice(1);
 
-    if(getComputeChoice == playerChoice){
-        return "Its a tie";
+    if (comPoints >= 5 || playerPoints >= 5) {
+        if (comPoints > playerPoints) {
+            divres.innerHTML += " Computer Wins" + "<br>";
+        } else if (comPoints < playerPoints) {
+            divres.innerHTML += " Player Wins" + "<br>";
+        } else {
+            divres.innerHTML += " It's a tie" + "<br>";
+        }
+    }
+    else if(getComputeChoice == playerChoice){
+        playerPoints++;
+        comPoints++;
+        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + '<br>';
     }
     else if(playerChoice == "Rock" && getComputeChoice == "Paper"){
-        
-        return "You lose," + getComputeChoice + " beats " + playerChoice;
+        comPoints++;
+        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + "<br>";
     }
     else if(playerChoice == "Scissor" && getComputeChoice == "Rock"){
-        return "You lose," + getComputeChoice + " beats " + playerChoice;
+        comPoints++;
+        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + '<br>';
     }
     else if(playerChoice == "Paper" && getComputeChoice == "Scissor"){
-        return "You lose," + getComputeChoice + " beats " + playerChoice;
+        comPoints++;
+        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + '<br>';
     }
     else{
-        return "You Win," + playerChoice + " beats " + getComputeChoice;
+        playerPoints++;
+        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + "<br>";
     }
 }
 
-const roundCompChoice = AskComputerChoice();
-const roundPlayerChoice = AskplayerChoice();
-console.log(playRound(roundCompChoice, roundPlayerChoice));
-
 const div = document.createElement("div");
-const btnrock = div.createElement("button");
-const btnpaper = div.createElement("button");
-const btnscissor = div.createElement("button");
+document.body.appendChild(div);
+
+const btnrock = document.createElement("button");
+const btnpaper = document.createElement("button");
+const btnscissor = document.createElement("button");
+
+btnrock.textContent = "Rock";
+btnpaper.textContent = "Paper";
+btnscissor.textContent = "Scissor";
 
 div.appendChild(btnrock);
 div.appendChild(btnpaper);
 div.appendChild(btnscissor);
 
-const rockChoice = AskComputerChoice();
-console.log(btnrock.addEventListenter("click", playRound(rockChoice, 'rock')));
+const buttons = document.querySelectorAll("button");
 
-const paperChoice = AskComputerChoice();
-console.log(btnrock.addEventListenter("click", playRound(paperChoice, 'paper')));
+buttons.forEach((button)=>{
+    button.style.backgroundColor = "coral";
+    button.style.width = "20%";
+    button.style.fontSize = "300%";
+    button.style.margin = "6.5%";
+    button.style.alignContent = "center";
+});
 
-const scissorChoice = AskComputerChoice();
-console.log(btnrock.addEventListenter("click", playRound(scissorChoice, 'scissor')));
+    btnrock.addEventListener("click", function () {
+        const compChoice = AskComputerChoice();
+        playRound(compChoice, "rock");
+    });
+    btnpaper.addEventListener("click", function () {
+        const compChoice = AskComputerChoice();
+        playRound(compChoice, "paper");
+    });
+    btnscissor.addEventListener("click", function () {
+        const compChoice = AskComputerChoice();
+        playRound(compChoice, "scissor");
+    });
+divres = document.createElement("div");
+document.body.appendChild(divres);
+divres.textContent = "";
+divres.style.color = "DarkSlateGray";
+divres.style.fontSize = "300%";
+// divres.style.justifycontent= "center";
+divres.style.textAlign = "center";
 
-const div2 = document.createElement("div");
+document.body.style.backgroundColor = "PaleTurquoise";
+
+
