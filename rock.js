@@ -17,7 +17,33 @@ let comPoints = 0;
 function playRound(getComputeChoice, playerChoice){
     playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
     getComputeChoice = getComputeChoice.charAt(0).toUpperCase() + getComputeChoice.slice(1);
+    let playerEmoji;
+    let compEmoji;
+    switch (playerChoice) {
+        case 'Rock':
+          playerEmoji = '🪨';
+          break;
 
+        case 'Paper':
+            playerEmoji = '📃';
+            break;
+        case 'Scissor':
+            playerEmoji = '✂️';
+            break;
+      }
+
+      switch (getComputeChoice) {
+        case 'Rock':
+          compEmoji = '🪨';
+          break;
+
+        case 'Paper':
+            compEmoji = '📃';
+            break;
+        case 'Scissor':
+            compEmoji = '✂️';
+            break;
+      }
     if (comPoints >= 5 || playerPoints >= 5) {
         if (comPoints > playerPoints) {
             divres.innerHTML += " Computer Wins" + "<br>";
@@ -30,23 +56,23 @@ function playRound(getComputeChoice, playerChoice){
     else if(getComputeChoice == playerChoice){
         playerPoints++;
         comPoints++;
-        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + '<br>';
+        divres.innerHTML += `Player: ` + playerEmoji + " " + playerPoints + "\t" + " Computer: " + compEmoji+ " "  + comPoints + '<br>';
     }
     else if(playerChoice == "Rock" && getComputeChoice == "Paper"){
         comPoints++;
-        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + "<br>";
+        divres.innerHTML += `Player: ` + playerEmoji + " "  + playerPoints +"\t" + " Computer: " + compEmoji + " "  + comPoints + "<br>";
     }
     else if(playerChoice == "Scissor" && getComputeChoice == "Rock"){
         comPoints++;
-        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + '<br>';
+        divres.innerHTML += `Player: ` + playerEmoji + " " + playerPoints + "\t" + " Computer: " +  compEmoji + " "  + comPoints + '<br>';
     }
     else if(playerChoice == "Paper" && getComputeChoice == "Scissor"){
         comPoints++;
-        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + '<br>';
+        divres.innerHTML += `Player: ` + playerEmoji + " " + playerPoints + "\t" + " Computer: " +  compEmoji + " "  + comPoints + '<br>';
     }
     else{
         playerPoints++;
-        divres.innerHTML += `Player: ` + playerPoints + `  Computer: ` + comPoints + "<br>";
+        divres.innerHTML += `Player: ` + playerEmoji + " " + playerPoints + "\t" + " Computer: " +  compEmoji + " "  + comPoints + "<br>";
     }
 }
 
